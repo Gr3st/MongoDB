@@ -8,10 +8,10 @@ export function useFormData() {
   const [password, setPassword] = useState('');
   const [list, setList] = useState([]);
 
-  useEffect(() => {
-    axios.get('https://bookish-adventure-qrv6xv6p4x629x7v-4000.app.github.dev/tweets')
-      .then((res) => setList(res.data));
-  }, [name, email, list]);
+//   useEffect(() => {
+//     axios.get('https://bookish-adventure-qrv6xv6p4x629x7v-4000.app.github.dev/tweets')
+//       .then((res) => setList(res.data));
+//   }, [name, email, list]);
 
   const axiosPostData = async () => {
     const hashedPassword = await bcrypt.hash(password, 10);

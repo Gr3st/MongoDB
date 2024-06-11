@@ -4,7 +4,8 @@ import axios from 'axios';
 import { useEffect, useState } from 'react';
 import bcrypt from 'bcryptjs'
 import MessageForm from './components/MessageForm';
-import LoginForm from './components/LoginForm';
+import RegisterForm from './components/RegisterForm';
+import Chat from './components/Chat';
 
 function App() {
   // const [name, setName] = useState('');
@@ -52,7 +53,8 @@ function App() {
 
   return (
     <div className="App">
-      <LoginForm />
+      <Chat />
+      <RegisterForm />
       <MessageForm />
     </div>
   );
