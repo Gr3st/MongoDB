@@ -39,6 +39,7 @@ export function useFormData() {
 }
 
 export function useFormDataLogin() {
+  const [senderId, setSenderId] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loginStatus, setLoginStatus] = useState(null);
@@ -47,8 +48,9 @@ export function useFormDataLogin() {
     const fetchUserData = async () => {
       if (!email) return;
       try {
-        const res = await axios.get('https://bookish-adventure-qrv6xv6p4x629x7v-4000.app.github.dev/chat');
+        const res = await axios.get('https://bookish-adventure-qrv6xv6p4x629x7v-4000.app.github.dev/userData');
         const user = res.data.find(user => user.email === email);
+        setSenderId(user._id);
         if (user) {
           const isMatch = await bcrypt.compare(password, user.password);
           setLoginStatus(isMatch ? 'success' : 'failure');
@@ -65,7 +67,11 @@ export function useFormDataLogin() {
       fetchUserData();
     }
   }, [email, password]);
-
+  useEffect(() => {
+    if (email) {
+      localStorage.setItem('senderID', senderId);
+    }
+  }, [senderId]);
   const handleSendData = (event) => {
     event.preventDefault();
     // Validation and side effects are handled in useEffect based on state changes
