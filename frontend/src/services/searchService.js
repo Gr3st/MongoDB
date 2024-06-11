@@ -5,13 +5,13 @@ import React from 'react';
 export function searchMechanics() {
   const [search, setSearch] = useState('');
   const [usersData, setUsersData] = useState([]);
-  const [reciverID, setReciverID] = useState('');
+  const [receiverID, setReceiverID] = useState('');
   const [activeUser, setActiveUser] = useState(false);
 
   const getSearchUsers = async () => {
     try {
       const res = await axios.get('https://bookish-adventure-qrv6xv6p4x629x7v-4000.app.github.dev/userData');
-      const users = res.data.filter(user => activeUser ? user._id === reciverID : user.username.includes(search));
+      const users = res.data.filter(user => activeUser ? user._id === receiverID : user.username.includes(search));
       setUsersData(users);
     } catch (error) {
       console.error('Error fetching user data:', error);
@@ -25,13 +25,13 @@ export function searchMechanics() {
     } else {
       setUsersData([]); // Reset usersData if search is empty
     }
-  }, [search, reciverID]);
+  }, [search, receiverID]);
 
   useEffect(() => {
-    if (reciverID) {
-      localStorage.setItem('reciverID', reciverID);
+    if (receiverID) {
+      localStorage.setItem('receiverID', receiverID);
     }
-  }, [reciverID]);
+  }, [receiverID]);
 
-  return { search, setSearch, usersData, setUsersData, reciverID, setReciverID, activeUser, setActiveUser };
+  return { search, setSearch, usersData, setUsersData, receiverID, setReceiverID, activeUser, setActiveUser };
 }

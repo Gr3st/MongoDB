@@ -5,7 +5,7 @@ import React from 'react';
 import {searchMechanics} from '../services/searchService';
 
 function App() {
-  const { search, setSearch, usersData, setUsersData, reciverID, setReciverID, activeUser, setActiveUser } = searchMechanics();
+  const { search, setSearch, usersData, setUsersData, receiverID, setReceiverID, activeUser, setActiveUser } = searchMechanics();
 
   return (
     <>
@@ -18,7 +18,7 @@ function App() {
         <div>
           <h3>Matching Users</h3>
           {usersData.map(user => (
-            <div key={user._id} onClick={() => { setReciverID(user._id); setSearch(user.username); setActiveUser(true); }}>
+            <div key={user._id} onClick={() => { setReceiverID(user._id); setSearch(user.username); setActiveUser(true); }}>
               <p>Username: {user.username}</p>
             </div>
           ))}

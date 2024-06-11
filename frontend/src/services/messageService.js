@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 
 export function messageService() {
   const [senderId, setSenderId] = useState("6667fb4535a67514c997edcd");
-  const [receiverId, setReceiverId] = useState(localStorage.getItem('reciverID') || '');
+  const [receiverId, setReceiverId] = useState(localStorage.getItem('receiverID') || '');
   const [content, setContent] = useState('');
 
 
