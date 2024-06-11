@@ -8,10 +8,11 @@ export function useFormData() {
   const [password, setPassword] = useState('');
   const [list, setList] = useState([]);
 
-//   useEffect(() => {
-//     axios.get('https://bookish-adventure-qrv6xv6p4x629x7v-4000.app.github.dev/tweets')
-//       .then((res) => setList(res.data));
-//   }, [name, email, list]);
+  // Commenting this out as it's not clear if this is needed currently.
+  // useEffect(() => {
+  //   axios.get('https://bookish-adventure-qrv6xv6p4x629x7v-4000.app.github.dev/tweets')
+  //     .then((res) => setList(res.data));
+  // }, [name, email, list]);
 
   const axiosPostData = async () => {
     const hashedPassword = await bcrypt.hash(password, 10);
@@ -35,4 +36,40 @@ export function useFormData() {
   };
 
   return { name, setName, email, setEmail, password, setPassword, list, handleSendData };
+}
+
+export function useFormDataLogin() {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [loginStatus, setLoginStatus] = useState(null);
+
+  useEffect(() => {
+    const fetchUserData = async () => {
+      if (!email) return;
+      try {
+        const res = await axios.get('https://bookish-adventure-qrv6xv6p4x629x7v-4000.app.github.dev/chat');
+        const user = res.data.find(user => user.email === email);
+        if (user) {
+          const isMatch = await bcrypt.compare(password, user.password);
+          setLoginStatus(isMatch ? 'success' : 'failure');
+        } else {
+          setLoginStatus('failure');
+        }
+      } catch (err) {
+        console.error('Error fetching user data:', err);
+        setLoginStatus('error');
+      }
+    };
+
+    if (password) {
+      fetchUserData();
+    }
+  }, [email, password]);
+
+  const handleSendData = (event) => {
+    event.preventDefault();
+    // Validation and side effects are handled in useEffect based on state changes
+  };
+
+  return { email, setEmail, password, setPassword, handleSendData, loginStatus };
 }

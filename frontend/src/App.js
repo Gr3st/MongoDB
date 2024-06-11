@@ -5,6 +5,7 @@ import './App.css';
 // import bcrypt from 'bcryptjs'
 import MessageForm from './components/MessageForm';
 import RegisterForm from './components/RegisterForm';
+import LoginForm from './components/LoginForm';
 import Chat from './components/Chat';
 
 function App() {
@@ -56,6 +57,8 @@ function App() {
       <Chat />
       <RegisterForm />
       <MessageForm />
+      <p>LOGIN</p>
+      <LoginForm />
     </div>
   );
 }
