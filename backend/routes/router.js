@@ -7,22 +7,7 @@ const messageController = require('../controllers/messageController');
 router.post('/user',authController.register);
 router.post('/login', authController.login);
 router.post('/message', messageController.send);
-
-router.get('/tweets', async (req, res) => {
-    
-
-    // this code will get all tweets
-    //const userTweets = await tweets.find({}, (err, tweetData) => {
-
-    // this code will get all tweets and join the user table
-    const userTweets = await Schemas.Users.find({}).exec()
-        if (userTweets) {
-            res.end(JSON.stringify(userTweets));
-        } else {
-            res.end();
-        }
-    
-});
+router.get('/chat', messageController.getChat);
 
 // router.post('/user', async (req, res) => {
 //     const { username, email, password } = req.body;

@@ -20,3 +20,22 @@ exports.send = async (req, res) => {
         res.status(500).send('Internal Server Error');
     }
 };
+
+exports.getChat = async(req, res) =>{
+    
+    
+
+        // this code will get all tweets
+        //const userTweets = await tweets.find({}, (err, tweetData) => {
+    
+        // this code will get all tweets and join the user table
+    const userTweets = await Schemas.Users.find({}).exec()
+        if (userTweets) {
+            res.end(JSON.stringify(userTweets));
+        } else {
+            res.end();
+        }
+    
+  
+    
+}
