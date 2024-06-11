@@ -1,12 +1,14 @@
 import '../App.css';
 import axios from 'axios';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 export function messageService() {
   const [senderId, setSenderId] = useState("6667fb4535a67514c997edcd");
-  const [receiverId, setReceiverId] = useState("6667fd7935a67514c997f2ef");
+  const [receiverId, setReceiverId] = useState(localStorage.getItem('reciverID') || '');
   const [content, setContent] = useState('');
 
+
+  
   const handleSendData = async (event) => {
     event.preventDefault();
 

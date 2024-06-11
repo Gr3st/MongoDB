@@ -7,6 +7,7 @@ import MessageForm from './components/MessageForm';
 import RegisterForm from './components/RegisterForm';
 import LoginForm from './components/LoginForm';
 import Chat from './components/Chat';
+import Search from './components/Search';
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 
 function App() {
@@ -60,12 +61,14 @@ function App() {
         <Link to="/login">Login</Link>
         <Link to="/message">Message</Link>
         <Link to="/chat">Chat</Link>
+        <Link to="/search">Search</Link>
          
         <Routes>
           <Route path="/register" element={<RegisterForm />} />
           <Route path="/login" element={<LoginForm />} />
           <Route path="/message" element={<MessageForm />} />
           <Route path="/chat" element={<Chat />} />
+          <Route path="/search" element={<Search />} />
         </Routes>
     
 

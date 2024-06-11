@@ -7,7 +7,7 @@ const messageController = require('../controllers/messageController');
 router.post('/user',authController.register);
 router.post('/login', authController.login);
 router.post('/message', messageController.send);
-router.get('/chat', messageController.getChat);
+router.get('/userData', messageController.getChat);
 
 // router.post('/user', async (req, res) => {
 //     const { username, email, password } = req.body;
