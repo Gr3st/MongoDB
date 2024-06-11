@@ -7,6 +7,7 @@ import MessageForm from './components/MessageForm';
 import RegisterForm from './components/RegisterForm';
 import LoginForm from './components/LoginForm';
 import Chat from './components/Chat';
+import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 
 function App() {
   // const [name, setName] = useState('');
@@ -54,11 +55,22 @@ function App() {
 
   return (
     <div className="App">
-      <Chat />
-      <RegisterForm />
-      <MessageForm />
-      <p>LOGIN</p>
-      <LoginForm />
+      <Router>
+        <Link to="/register">Register</Link>
+        <Link to="/login">Login</Link>
+        <Link to="/message">Message</Link>
+        <Link to="/chat">Chat</Link>
+         
+        <Routes>
+          <Route path="/register" element={<RegisterForm />} />
+          <Route path="/login" element={<LoginForm />} />
+          <Route path="/message" element={<MessageForm />} />
+          <Route path="/chat" element={<Chat />} />
+        </Routes>
+    
+
+      
+      </Router>
     </div>
   );
 }
