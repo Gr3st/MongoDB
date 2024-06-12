@@ -3,11 +3,15 @@ const router = express.Router();
 const Schemas = require('../models/schemas');
 const authController = require('../controllers/authController');
 const messageController = require('../controllers/messageController');
+const userController = require('../controllers/userController');
 
 router.post('/user',authController.register);
 router.post('/login', authController.login);
 router.post('/message', messageController.send);
-router.get('/userData', messageController.getChat);
+router.get('/userChats', messageController.getChat);
+router.get('/chat/:chatId/messages', messageController.getMessages);
+router.get('/userData', userController.getUsersData);
+
 
 // router.post('/user', async (req, res) => {
 //     const { username, email, password } = req.body;
