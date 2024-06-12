@@ -2,7 +2,7 @@ import '../App.css';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 
-function App() {
+export function privateChatGet() {
   const [chats, setChats] = useState([]);
   const [selectedChat, setSelectedChat] = useState(null);
   const [messages, setMessages] = useState([]);
@@ -34,32 +34,7 @@ function App() {
     }
   };
 
-  return (
-    <>
-      <h1>Private Chats</h1>
-      <ul>
-        {chats.map(chat => (
-          <li key={chat._id} onClick={() => fetchMessages(chat)}>
-            {localStorage.getItem('senderID') === chat.user1Id._id ? chat.user2Id.username : chat.user1Id.username}
-          </li>
-        ))}
-      </ul>
-      {selectedChat && (
-        <div>
-          <h2>Messages</h2>
-          <ul>
-            {messages.map(message => (
-              <li key={message._id}>
-                {message.senderId === selectedChat.user1Id._id
-                  ? selectedChat.user1Id.username
-                  : selectedChat.user2Id.username}: {message.content}
-              </li>
-            ))}
-          </ul>
-        </div>
-      )}
-    </>
-  );
+  return {chats, setChats, messages, setMessages, selectedChat, setSelectedChat, fetchMessages};
 }
 
-export default App;
+

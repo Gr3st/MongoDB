@@ -1,18 +1,26 @@
 import '../App.css';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useFormDataLogin } from '../services/authService';
+import { useNavigate } from 'react-router-dom';
 
-function App() {
+function App({onLogin}) {
+  const navigate = useNavigate();
   const { email, setEmail, password, setPassword, handleSendData, loginStatus } = useFormDataLogin();
+  useEffect(()=>{
+    if(loginStatus==='success'){
+      onLogin();
+      navigate('/'); 
+    }
+  },[loginStatus])
   
   return (
     <>
-      <form onSubmit={handleSendData}>
+      <form>
         <label>Email</label><br />
-        <input type="text" value={email} onChange={(e) => setEmail(e.target.value)} /><br />
+        <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} /><br />
         <label>Password</label><br />
         <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} /><br />
-        <input type="submit" value="Send" />
+        <input type="submit" value="Send"  onClick={handleSendData}/>
       </form>
       {loginStatus && (
         <p>

@@ -1,78 +1,75 @@
-
 import './App.css';
-// import axios from 'axios';
-// import { useEffect, useState } from 'react';
-// import bcrypt from 'bcryptjs'
 import MessageForm from './components/MessageForm';
 import RegisterForm from './components/RegisterForm';
 import LoginForm from './components/LoginForm';
-import Chat from './components/Chat';
+// import Chat from './components/Chat';
 import Search from './components/Search';
+import LogOut from './components/LogOut'; // Ensure the import is correct
+
+import { privateChatGet } from './services/chatService';
+import PrivateChats from './components/ChatPrivate';
+import PrivateMessages from './components/ChatMessage';
+
+
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+import { useState, useEffect } from 'react';
 
 function App() {
-  // const [name, setName] = useState('');
-  // const [email, setEmail] = useState('');
-  // const [password, setPassword] = useState('');
-  // const [list, setList] = useState([]);
+  const [isLogged, setIsLogged] = useState(false);
+  const {chats, setChats, messages, setMessages, selectedChat, setSelectedChat, fetchMessages} = privateChatGet();
 
-  // useEffect(()=>{
-  //   axios.get('https://bookish-adventure-qrv6xv6p4x629x7v-4000.app.github.dev/tweets').then((res)=>setList(res.data));
-  // },[name, email, list,[]])
+  const handleCheckStatus = () => {
+    if (localStorage.getItem('senderID')) {
+      setIsLogged(true);
+    } else {
+      setIsLogged(false);
+    }
+  };
+  useEffect(() => {
+    handleCheckStatus();
+  }, []);
 
-  // const axiosPostData = async () => {
-  //   const hashedPassword = await bcrypt.hash(password, 10);
-  // //   bcrypt.compare(password, hashedPassword, (err, result) => { -> sprawdzenie poprawnosci hasła
-  // //     if (err) {
-  // //         console.error('Błąd porównywania hasła:', err);
-  // //         return;
-  // //     }
-      
-  // //     if (result) {
-  // //         console.log('Hasła są zgodne.');
-  // //     } else {
-  // //         console.log('Hasła nie są zgodne.');
-  // //     }
-  // // });
-  //   console.log(hashedPassword)
-  //   const postData = {
-  //     username: name,
-  //     email: email,
-  //     password: hashedPassword,
-  //   };
-
-  //   try {
-  //     const res = await axios.post('https://bookish-adventure-qrv6xv6p4x629x7v-4000.app.github.dev/user', postData);
-  //     console.log(res);
-  //   } catch (err) {
-  //     console.log(err);
-  //   }
+  // const handleLogin = () => {
+  //   setIsLogged(true);
   // };
-
-  // const handleSendData = (event) => {
-  //   event.preventDefault();
-  //   axiosPostData();
-  // };
+  const handleLogin = () => {
+    setIsLogged(true);
+  };
+  const handleLogout = () => {
+    setIsLogged(false);
+  };
 
   return (
     <div className="App">
       <Router>
-        <Link to="/register">Register</Link>
-        <Link to="/login">Login</Link>
-        <Link to="/message">Message</Link>
-        <Link to="/chat">Chat</Link>
-        <Link to="/search">Search</Link>
+        <div className='left-panel'>
+          {/* <Link to="/search">Search</Link> */}
+          <Search />
+          <PrivateChats chats={chats} fetchMessages={fetchMessages} />
+          {isLogged
+            ? <Link to="/logout">Logout</Link>
+            : <Link to="/login">Login</Link>}
+        </div>
+        
+      
+        {/* <Chat /> */}
+        <div className='right-panel'>
+          {selectedChat && <PrivateMessages messages={messages} selectedChat={selectedChat} />}
+          <MessageForm />
+        </div>
+        {/* <Link to="/register">Register</Link> */}
+        {/* <Link to="/message">Message</Link>
+        <Link to="/chat">Chat</Link> */}
+        
          
         <Routes>
-          <Route path="/register" element={<RegisterForm />} />
-          <Route path="/login" element={<LoginForm />} />
-          <Route path="/message" element={<MessageForm />} />
-          <Route path="/chat" element={<Chat />} />
-          <Route path="/search" element={<Search />} />
+          <Route path='/logout' element={<LogOut onLogout={handleLogout} />} />
+          {/* <Route path="/register" element={<RegisterForm />} /> */}
+          <Route path="/login" element={<LoginForm onLogin={handleLogin}/>} />
+          {/* <Route path="/message" element={<MessageForm />} /> */}
+          {/* <Route path="/chat" element={<Chat />} /> */}
+          {/* <Route path="/search" element={<Search />} /> */}
         </Routes>
-    
-
-      
       </Router>
     </div>
   );
