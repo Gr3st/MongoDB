@@ -7,6 +7,7 @@ export function privateChatGet() {
   const [selectedChat, setSelectedChat] = useState(null);
   const [messages, setMessages] = useState([]);
 
+
   useEffect(() => {
     const fetchChats = async () => {
       try {
@@ -26,6 +27,7 @@ export function privateChatGet() {
 
   const fetchMessages = async (chat) => {
     try {
+      localStorage.setItem('receiverID',localStorage.getItem('senderID') === chat.user1Id._id ? chat.user2Id._id : chat.user1Id._id) 
       const response = await axios.get(`https://bookish-adventure-qrv6xv6p4x629x7v-4000.app.github.dev/chat/${chat._id}/messages`);
       setMessages(response.data);
       setSelectedChat(chat);
@@ -34,7 +36,7 @@ export function privateChatGet() {
     }
   };
 
-  return {chats, setChats, messages, setMessages, selectedChat, setSelectedChat, fetchMessages};
+  return {chats, setChats, messages, setMessages, selectedChat, setSelectedChat, fetchMessages, isUpdateData, setIsUpdateData};
 }
 
 
