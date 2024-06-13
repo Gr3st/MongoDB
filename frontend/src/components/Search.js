@@ -9,11 +9,13 @@ function App() {
 
   return (
     <>
-      <input
-        type="text"
-        placeholder='search...'
-        onChange={(e) => setSearch(e.target.value)}
-      />
+      <div className='search'>
+        <input
+          type="text"
+          placeholder='search...'
+          onChange={(e) => setSearch(e.target.value)}
+        />
+      </div>
       {usersData.length > 0 ? (
         <div>
           <h3>Matching Users</h3>

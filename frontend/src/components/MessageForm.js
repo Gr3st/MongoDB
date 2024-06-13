@@ -7,12 +7,11 @@ function App() {
   const {senderId, setSenderId, receiverId, setReceiverId, content, setContent, handleSendData} = messageService();
 
   return (
-    <div className="App">
-      <form>
-        <label>Content</label><br />
-        <input type="text" value={content} onChange={(e) => setContent(e.target.value)} /><br />
-        <input type="submit" value="send" onClick={handleSendData}/>
-      </form>
+    <div className="message-field">
+    
+        <div className='message-field-type'><input type="text" placeholder='type...' value={content} onChange={(e) => setContent(e.target.value)} /><button onClick={handleSendData}>send</button></div>
+        
+  
     </div>
   );
 }
