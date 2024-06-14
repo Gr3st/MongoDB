@@ -14,10 +14,7 @@ function App() {
 
   return (
     <div className="message-field">
-    
         <div className='message-field-type'><input type="text" placeholder='type...' value={content} onChange={(e) => setContent(e.target.value)} onKeyDown={handleKeyPress}/><button onClick={handleSendData}>send</button></div>
-        
-  
     </div>
   );
 }
