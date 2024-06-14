@@ -6,7 +6,7 @@ function PrivateChats({ chats, fetchMessages }) {
       {/* <h1>Private Chats</h1> */}
       {chats.map(chat => (
         <div className='chat' key={chat._id} onClick={() => fetchMessages(chat)}>
-          {localStorage.getItem('senderID') === chat.user1Id._id ? chat.user2Id.username : chat.user1Id.username}
+          {localStorage.getItem('senderID') === chat.user1Id._id ? chat.user2Id.name+" "+chat.user2Id.surname+"\n"+chat.user2Id.username : chat.user1Id.name+" "+chat.user1Id.surname+"\n"+chat.user1Id.username}
         </div>
       ))}
     </div>

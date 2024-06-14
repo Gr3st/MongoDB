@@ -14,9 +14,9 @@ function App() {
         <label>Name</label><br />
         <input type="text" value={name} onChange={(e) => setName(e.target.value)} /><br />
         <label>Surname</label><br />
-        <input type="text" value={name} onChange={(e) => setSurname(e.target.value)} /><br />
+        <input type="text" value={surname} onChange={(e) => setSurname(e.target.value)} /><br />
         <label>Username</label><br />
-        <input type="text" value={name} onChange={(e) => setUserame(e.target.value)} /><br />
+        <input type="text" value={username} onChange={(e) => setUsername(e.target.value)} /><br />
         <label>Email</label><br />
         <input type="text" value={email} onChange={(e) => setEmail(e.target.value)} /><br />
         <label>Password</label><br />
