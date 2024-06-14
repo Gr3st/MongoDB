@@ -1,8 +1,8 @@
 const Schemas = require('../models/schemas');
 exports.register = async (req, res) => {
-    const { username, email, password } = req.body;
+    const { name, surname, username, email, password } = req.body;
 
-    if (!username || !email || !password) {
+    if (!name || !surname || !username || !email || !password) {
         return res.status(400).send('Name and email are required');
     }
 
@@ -15,7 +15,7 @@ exports.register = async (req, res) => {
         }
 
         // If not exists, create a new user instance
-        const newContact = new Schemas.Users({ username, email, password });
+        const newContact = new Schemas.Users({ name, surname, username, email, password });
 
         // Save the new user to the database
         const saveContact = await newContact.save();

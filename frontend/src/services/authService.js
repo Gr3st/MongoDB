@@ -5,6 +5,8 @@ import bcrypt from 'bcryptjs';
 
 export function useFormData() {
   const [name, setName] = useState('');
+  const [surname, setSurname] = useState('');
+  const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [list, setList] = useState([]);
@@ -18,7 +20,9 @@ export function useFormData() {
   const axiosPostData = async () => {
     const hashedPassword = await bcrypt.hash(password, 10);
     const postData = {
-      username: name,
+      name: name,
+      surname: surname,
+      username: username,
       email: email,
       password: hashedPassword,
     };
@@ -36,7 +40,7 @@ export function useFormData() {
     axiosPostData();
   };
 
-  return { name, setName, email, setEmail, password, setPassword, list, handleSendData };
+  return { name, setName, surname, setSurname, username, setUsername, email, setEmail, password, setPassword, list, handleSendData };
 }
 
 export function useFormDataLogin() {

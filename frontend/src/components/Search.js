@@ -18,7 +18,7 @@ function App() {
       </div>
       {usersData.length > 0 ? (
         <div>
-          <h3>Matching Users</h3>
+          {/* <h3>Matching Users</h3> */}
           {usersData.map(user => (
             <div key={user._id} onClick={() => { setReceiverID(user._id); setSearch(user.username); setActiveUser(true); }}>
               <p>Username: {user.username}</p>

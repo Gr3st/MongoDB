@@ -64,7 +64,7 @@ function App() {
          
         <Routes>
           <Route path='/logout' element={<LogOut onLogout={handleLogout} />} />
-          {/* <Route path="/register" element={<RegisterForm />} /> */}
+          <Route path="/register" element={<RegisterForm />} />
           <Route path="/login" element={<LoginForm onLogin={handleLogin}/>} />
           {/* <Route path="/message" element={<MessageForm />} /> */}
           {/* <Route path="/chat" element={<Chat />} /> */}
