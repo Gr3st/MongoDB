@@ -3,9 +3,8 @@ import React from 'react';
 function PrivateChats({ messages, chats, fetchMessages }) {
   const getLastMessage = (chatId) => {
     const chatMessages = messages.filter(message => 
-      message.senderId === localStorage.getItem('senderID') && message.receiverId === chatId
+      (message.senderId === localStorage.getItem('senderID') && message.receiverId === chatId) || (message.receiverId === localStorage.getItem('senderID') && message.senderId === chatId)
     );
-    console.log(chatMessages);
     return chatMessages.length > 0 ? chatMessages[chatMessages.length - 1].content : '';
   };
   
