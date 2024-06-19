@@ -26,6 +26,7 @@ function PrivateChats({ lastMessages, messages, chats, fetchMessages }) {
               {getLastMessage(chat._id)} {/* Display the last message */}
             </div>
             <ul>
+              
         {lastMessages.map((message) => (
           <li key={message.message._id}>
             <strong>From:</strong> {message.message.senderId}, <strong>To:</strong> {message.message.receiverId} - {message.message.content}

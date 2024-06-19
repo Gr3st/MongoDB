@@ -75,7 +75,7 @@ exports.getLastMessage = async (req, res) => {
   
     try {
       // Znajdź ostatnie wiadomości dla każdego czatu, w którym jest użytkownik o ID 2
-      const lastMessages = await Schemas.Message.aggregate([
+      const lastMessages = await Schemas.Message.find([
         { 
           $match: {
             $or: [
