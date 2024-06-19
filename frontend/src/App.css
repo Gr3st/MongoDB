@@ -80,9 +80,18 @@
   padding: 8px 16px 8px 16px;
   cursor: pointer;
   display: flex;
+  flex-direction: row;
   justify-content: flex-start;
   align-items: center;
   border-radius: 4px;
+}
+.left-panel .private-chats .chat .chat-data{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 8px 16px;
 }
 .chat:hover{
   background-color: rgb(42, 42, 49);

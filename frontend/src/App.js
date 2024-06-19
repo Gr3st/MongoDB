@@ -45,7 +45,9 @@ function App() {
         <div className='left-panel'>
           {/* <Link to="/search">Search</Link> */}
           <Search />
-          <PrivateChats chats={chats} fetchMessages={fetchMessages} />
+    
+          <PrivateChats messages={messages} chats={chats} fetchMessages={fetchMessages} />
+
           {isLogged
             ? <Link to="/logout">Logout</Link>
             :     

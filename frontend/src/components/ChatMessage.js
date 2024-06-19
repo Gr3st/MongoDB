@@ -3,6 +3,7 @@ import React from 'react';
 function PrivateMessages({ messages, selectedChat }) {
   return (
     <>
+    console.log(messages);
       {/* <h2>Messages</h2> */}
       {messages.map(message => (
         <div key={message._id} className='chat-panel'>
