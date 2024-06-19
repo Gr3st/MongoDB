@@ -1,6 +1,5 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
-import React from 'react';
 
 export function searchMechanics() {
   const [search, setSearch] = useState('');
@@ -11,7 +10,11 @@ export function searchMechanics() {
   const getSearchUsers = async () => {
     try {
       const res = await axios.get('https://bookish-adventure-qrv6xv6p4x629x7v-4000.app.github.dev/userData');
-      const users = res.data.filter(user => activeUser ? user._id === receiverID : user.username.includes(search));
+      const users = res.data.filter(user => 
+        activeUser 
+          ? user._id === receiverID 
+          : user.username.toLowerCase().includes(search.toLowerCase()) 
+      );
       setUsersData(users);
     } catch (error) {
       console.error('Error fetching user data:', error);
@@ -21,15 +24,17 @@ export function searchMechanics() {
   useEffect(() => {
     if (search) {
       getSearchUsers();
-      setActiveUser(!activeUser);
     } else {
       setUsersData([]); // Reset usersData if search is empty
     }
-  }, [search, receiverID]);
+  }, [search]);
 
   useEffect(() => {
     if (receiverID) {
+      setActiveUser(true);
       localStorage.setItem('receiverID', receiverID);
+    } else {
+      setActiveUser(false);
     }
   }, [receiverID]);
 

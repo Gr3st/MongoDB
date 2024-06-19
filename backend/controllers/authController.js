@@ -1,8 +1,8 @@
 const Schemas = require('../models/schemas');
 exports.register = async (req, res) => {
-    const { name, surname, username, email, password } = req.body;
+    const { name, surname, username, email, password, cpassword } = req.body;
 
-    if (!name || !surname || !username || !email || !password) {
+    if (!name || !surname || !username || !email || !password || !cpassword) {
         return res.status(400).send('Name and email are required');
     }
 
@@ -13,7 +13,9 @@ exports.register = async (req, res) => {
         if (existingUser) {
             return res.status(400).send('User with this email already exists');
         }
-
+        else if(!cpassword){
+            return res.status(400).send('Password do not match');
+        }
         // If not exists, create a new user instance
         const newContact = new Schemas.Users({ name, surname, username, email, password });
 
@@ -48,6 +50,7 @@ exports.login = async (req, res) => {
         if (!isPasswordValid) {
             return res.status(400).send('Invalid password');
         }
+    
 
         // If user exists and password is correct, you can consider the user logged in
         res.send('User logged in successfully');

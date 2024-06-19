@@ -48,7 +48,11 @@ function App() {
           <PrivateChats chats={chats} fetchMessages={fetchMessages} />
           {isLogged
             ? <Link to="/logout">Logout</Link>
-            : <Link to="/login">Login</Link>}
+            :     
+            <>
+              <Link to="/login">Login</Link>
+              <Link to="/register">Register</Link>
+            </>}
         </div>
         
       

@@ -9,7 +9,9 @@ export function useFormData() {
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [list, setList] = useState([]);
+  const [cpassword, setCPassword] = useState(false);
+  const [error, setError] = useState('');
+  const navigate = useNavigate();
 
   // Commenting this out as it's not clear if this is needed currently.
   // useEffect(() => {
@@ -18,29 +20,36 @@ export function useFormData() {
   // }, [name, email, list]);
 
   const axiosPostData = async () => {
+    
     const hashedPassword = await bcrypt.hash(password, 10);
+    
     const postData = {
       name: name,
       surname: surname,
       username: username,
       email: email,
       password: hashedPassword,
+      cpassword: cpassword,
     };
 
     try {
       const res = await axios.post('https://bookish-adventure-qrv6xv6p4x629x7v-4000.app.github.dev/user', postData);
       console.log(res);
+      navigate('/');
     } catch (err) {
+      setError(err.response ? err.response.data : err.message);
       console.log(err);
     }
   };
 
   const handleSendData = (event) => {
     event.preventDefault();
+    setCPassword(password===cpassword);
     axiosPostData();
+
   };
 
-  return { name, setName, surname, setSurname, username, setUsername, email, setEmail, password, setPassword, list, handleSendData };
+  return { name, setName, surname, setSurname, username, setUsername, email, setEmail, password, setPassword, cpassword, setCPassword, error, setError, handleSendData };
 }
 
 export function useFormDataLogin() {
