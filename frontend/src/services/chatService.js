@@ -23,7 +23,7 @@ export function privateChatGet() {
   };
   useEffect(() => {
     fetchChats();
-  }, []);
+  }, [localStorage.getItem('senderID'),[]]);
 
   const fetchMessages = async (chat) => {
     try {
