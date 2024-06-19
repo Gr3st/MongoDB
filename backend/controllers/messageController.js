@@ -70,3 +70,35 @@ exports.getMessages = async (req, res) => {
         res.status(500).send('Internal Server Error');
     }
 };
+exports.getLastMessage = async (req, res) => {
+    const userId = parseInt(req.params.userId); // ID użytkownika
+  
+    try {
+      // Znajdź ostatnie wiadomości dla każdego czatu, w którym jest użytkownik o ID 2
+      const lastMessages = await Schemas.Message.aggregate([
+        { 
+          $match: {
+            $or: [
+              { senderId: userId },
+              { receiverId: userId }
+            ]
+          }
+        },
+        {
+          $sort: { timestamp: -1 }
+        },
+        {
+          $group: {
+            _id: { $cond: [{ $eq: ['$senderId', userId] }, '$receiverId', '$senderId'] },
+            message: { $first: '$$ROOT' }
+          }
+        }
+      ]);
+  
+      res.json(lastMessages);
+    } catch (err) {
+      console.error(err);
+      res.status(500).json({ message: 'Server error' });
+    }
+};
+  

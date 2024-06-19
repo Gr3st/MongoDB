@@ -11,6 +11,7 @@ router.post('/message', messageController.send);
 router.get('/userChats', messageController.getChat);
 router.get('/chat/:chatId/messages', messageController.getMessages);
 router.get('/userData', userController.getUsersData);
+router.get('/last-messages/:userId', messageController.getLastMessage);
 
 
 // router.post('/user', async (req, res) => {

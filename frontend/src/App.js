@@ -16,7 +16,7 @@ import { useState, useEffect } from 'react';
 
 function App() {
   const [isLogged, setIsLogged] = useState(false);
-  const {chats, setChats, messages, setMessages, selectedChat, setSelectedChat, fetchMessages} = privateChatGet();
+  const {chats, setChats, messages, setMessages, selectedChat, setSelectedChat, fetchMessages, LastMessages, lastMessages} = privateChatGet();
 
   const handleCheckStatus = () => {
     if (localStorage.getItem('senderID')) {
@@ -46,7 +46,7 @@ function App() {
           {/* <Link to="/search">Search</Link> */}
           <Search />
     
-          <PrivateChats messages={messages} chats={chats} fetchMessages={fetchMessages} />
+          <PrivateChats lastMessages={lastMessages} messages={messages} chats={chats} fetchMessages={fetchMessages} />
 
           {isLogged
             ? <Link to="/logout">Logout</Link>

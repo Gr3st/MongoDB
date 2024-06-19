@@ -10,6 +10,7 @@ export function privateChatGet() {
   const [selectedChat, setSelectedChat] = useState(null);
   const [messages, setMessages] = useState([]);
   const { receiverID, setReceiverID } = searchMechanics();
+  const [lastMessages, setLastMessages] = useState([]);
   const fetchChats = async () => {
     try {
       const userId = localStorage.getItem('senderID') || '';
@@ -35,7 +36,22 @@ export function privateChatGet() {
       console.error('Error fetching messages:', error);
     }
   };
-
+  const LastMessages = () => {
+    
+  
+    useEffect(() => {
+      const fetchLastMessages = async () => {
+        try {
+          const response = await axios.get(`https://bookish-adventure-qrv6xv6p4x629x7v-4000.app.github.dev//last-messages/${localStorage.getItem('senderID')}`); // Zapytanie dla użytkownika o ID 2
+          setLastMessages(response.data);
+        } catch (error) {
+          console.error('Error fetching last messages:', error);
+        }
+      };
+  
+      fetchLastMessages();
+    }, []);
+  }
   useEffect(() => {
     if (selectedChat) {
       fetchMessages(selectedChat);
@@ -57,5 +73,5 @@ export function privateChatGet() {
     };
   }, [selectedChat,receiverID]);
 
-  return { chats, setChats, messages, setMessages, selectedChat, setSelectedChat, fetchMessages };
+  return { chats, setChats, messages, setMessages, selectedChat, setSelectedChat, fetchMessages, LastMessages, lastMessages };
 }
