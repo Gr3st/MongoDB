@@ -39,19 +39,14 @@ export function privateChatGet() {
   };
   const fetchLastMessages = async () => {
     try {
-      const response = await axios.get(`https://bookish-adventure-qrv6xv6p4x629x7v-4000.app.github.dev//last-messages/${localStorage.getItem('senderID')}`); // Zapytanie dla użytkownika o ID 2
-      setLastMessages(response.data);
-      console.log(response.data);
+    const userId = localStorage.getItem('senderID') || '';
+    const response = await axios.get(`https://bookish-adventure-qrv6xv6p4x629x7v-4000.app.github.dev/last-messages/${userId}`);
+    // console.log('Last messages response:', response.data);
+    setLastMessages(response.data);
     } catch (error) {
-      console.error('Error fetching last messages:', error);
+    console.error('Error fetching last messages:', error);
     }
   };
-
-  
-  useEffect(() => {
-    fetchLastMessages();
-  }, []);
-  
   useEffect(() => {
     if (selectedChat) {
       fetchMessages(selectedChat);
@@ -63,6 +58,7 @@ export function privateChatGet() {
     const handleMessageSent = () => {
       if (selectedChat) {
         fetchMessages(selectedChat);
+        fetchLastMessages();
       }
       fetchChats();
     };
