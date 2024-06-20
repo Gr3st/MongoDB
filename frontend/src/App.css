@@ -97,6 +97,30 @@
   background-color: rgb(42, 42, 49);
 }
 
+.left-panel .private-chats .chat .chat-data .last-message{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100%;
+  text-align: start;
+  flex-wrap: nowrap;
+  color: gray;
+}
+.left-panel .private-chats .chat .chat-data .last-message .last-message-text{
+  width: auto;
+  max-width: 150px;
+  padding-right: 8px;
+  overflow: hidden; /* Ukrycie zawartości, która nie mieści się w kontenerze */
+  white-space: nowrap; /* Zapobieganie zawijaniu tekstu */
+  text-overflow: ellipsis; 
+}
+.left-panel .private-chats .chat .chat-data .last-message .last-message-time{
+  display: flex; /* Używamy flexbox do umieszczenia obu elementów w jednym rzędzie */
+  align-items: center; /* Wyśrodkowanie zawartości w pionie */
+  padding-left: 8px;
+}
+
 .App .right-panel {
   display: flex;
   background-color: var(--background-dark-theme-right);
