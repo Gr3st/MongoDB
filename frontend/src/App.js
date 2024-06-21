@@ -10,7 +10,6 @@ import { privateChatGet } from './services/chatService';
 import PrivateChats from './components/ChatPrivate';
 import PrivateMessages from './components/ChatMessage';
 
-
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 
@@ -25,25 +24,27 @@ function App() {
       setIsLogged(false);
     }
   };
+
   useEffect(() => {
     handleCheckStatus();
   }, []);
 
-  // const handleLogin = () => {
-  //   setIsLogged(true);
-  // };
   const handleLogin = () => {
     setIsLogged(true);
   };
+
   const handleLogout = () => {
     setIsLogged(false);
+  };
+
+  const Home = () => {
+    return <div>Welcome to the Home Page</div>;
   };
 
   return (
     <div className="App">
       <Router>
         <div className='left-panel'>
-          {/* <Link to="/search">Search</Link> */}
           <Search />
     
           <PrivateChats lastMessages={lastMessages} messages={messages} chats={chats} fetchMessages={fetchMessages} />
@@ -57,24 +58,16 @@ function App() {
             </>}
         </div>
         
-      
-        {/* <Chat /> */}
         <div className='right-panel'>
           {selectedChat && <div className='messages-panel'><PrivateMessages messages={messages} selectedChat={selectedChat} /></div>}
           <MessageForm />
         </div>
-        {/* <Link to="/register">Register</Link> */}
-        {/* <Link to="/message">Message</Link>
-        <Link to="/chat">Chat</Link> */}
-        
-         
+
         <Routes>
+          <Route path="*" element={<div style={{display: 'none'}}> Not Found or You do not have permission.</div>}/>
           <Route path='/logout' element={<LogOut onLogout={handleLogout} />} />
           <Route path="/register" element={<RegisterForm />} />
           <Route path="/login" element={<LoginForm onLogin={handleLogin}/>} />
-          {/* <Route path="/message" element={<MessageForm />} /> */}
-          {/* <Route path="/chat" element={<Chat />} /> */}
-          {/* <Route path="/search" element={<Search />} /> */}
         </Routes>
       </Router>
     </div>
