@@ -13,14 +13,14 @@ function App() {
         <input
           type="text"
           placeholder='search...'
-          onChange={(e) => setSearch(e.target.value)}
+          onChange={(e) => {setSearch(e.target.value); localStorage.setItem('search',e.target.value===''?true:false)}}
         />
       </div>
       {usersData.length > 0 ? (
-        <div>
+        <div className="search-result">
           {/* <h3>Matching Users</h3> */}
           {usersData.map(user => (
-            <div key={user._id} onClick={() => { setReceiverID(user._id); setSearch(user.username); setActiveUser(true); }}>
+            <div  className="search-result-text" key={user._id} onClick={() => { setReceiverID(user._id); setSearch(user.username); setActiveUser(true); }}>
               <p>Username: {user.username}</p>
             </div>
           ))}

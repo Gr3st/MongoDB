@@ -1,7 +1,9 @@
 import React, { useEffect } from 'react';
 import moment from 'moment';
 
+
 function PrivateChats({ lastMessages, messages, chats, fetchMessages }) {
+
   const timeSinceMessage = (timestamp) => {
     if (!timestamp) {
       return 'Unknown time ago'; // Handle undefined or null timestamp gracefully
@@ -37,14 +39,17 @@ function PrivateChats({ lastMessages, messages, chats, fetchMessages }) {
   };
 
   const getLastMessage = (chatId) => {
-    const last = lastMessages.filter(last => last.receiverId === chatId || last.senderId === chatId);
+    const last = lastMessages.filter(
+      (last) => last.receiverId === chatId || last.senderId === chatId
+    );
     if (last.length === 0) return '';
 
     const lastMessage = last[last.length - 1];
     const time = timeSinceMessage(lastMessage.timestamp);
     return (
       <>
-        <div className='last-message-text'>{lastMessage.content}</div>{`‧`}
+        <div className='last-message-text'>{lastMessage.content}</div>
+        {`‧`}
         <div className='last-message-time'>{time}</div>
       </>
     );
@@ -52,19 +57,31 @@ function PrivateChats({ lastMessages, messages, chats, fetchMessages }) {
 
   return (
     <div className='private-chats'>
-      {chats.map(chat => (
-        <div className='chat' key={chat._id} onClick={() => fetchMessages(chat)}>
-          <img width="40" height="40" src="https://img.icons8.com/color/48/circled-user-female-skin-type-6--v1.png" alt="circled-user-female-skin-type-6--v1"/>
-          <div className='chat-data'>
-            <div className='chat-name'>
-              {localStorage.getItem('senderID') === chat.user1Id._id ? `${chat.user2Id.name} ${chat.user2Id.surname}` : `${chat.user1Id.name} ${chat.user1Id.surname}`}
-            </div>
-            <div className='last-message'>
-              {getLastMessage(localStorage.getItem('senderID') === chat.user1Id._id ? chat.user2Id._id : chat.user1Id._id)}
+      {localStorage.getItem('search')==='true'&&
+        chats.map((chat) => (
+          <div className='chat' key={chat._id} onClick={() => fetchMessages(chat)}>
+            <img
+              width='40'
+              height='40'
+              src='https://img.icons8.com/color/48/circled-user-female-skin-type-6--v1.png'
+              alt='circled-user-female-skin-type-6--v1'
+            />
+            <div className='chat-data'>
+              <div className='chat-name'>
+                {localStorage.getItem('senderID') === chat.user1Id._id
+                  ? `${chat.user2Id.name} ${chat.user2Id.surname}`
+                  : `${chat.user1Id.name} ${chat.user1Id.surname}`}
+              </div>
+              <div className='last-message'>
+                {getLastMessage(
+                  localStorage.getItem('senderID') === chat.user1Id._id
+                    ? chat.user2Id._id
+                    : chat.user1Id._id
+                )}
+              </div>
             </div>
           </div>
-        </div>
-      ))}
+        ))}
     </div>
   );
 }

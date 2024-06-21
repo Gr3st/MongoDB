@@ -65,7 +65,25 @@
   color: var(--text-dark-theme);
   outline: none;
 }
-
+.left-panel .search-result{
+  display: flex;
+  text-align: start;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  flex-direction: column;
+  height: auto;
+  background-color: var(--background-dark-theme-left);
+}
+.left-panel .search-result .search-result-text{
+  width: 100%;
+  max-width: calc(300px - 32px);
+  display: flex;
+  font-size: 1rem;
+  margin: 8px 16px;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
 .left-panel .private-chats{
   width: 100%;
   height: auto;
