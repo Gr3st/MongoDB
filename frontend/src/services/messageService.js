@@ -1,38 +1,28 @@
-import { useEffect, useState } from 'react';
+// messageService.js
 import axios from 'axios';
+import { useEffect, useState } from 'react';
 import EventEmitter from 'events';
-import { privateChatGet } from './chatService';
 
 const messageEventEmitter = new EventEmitter();
 
-export function useMessageService() {
-  const { fetchMessages, fetchChats, chats } = privateChatGet();
+export function messageService() {
   const [senderId, setSenderId] = useState(localStorage.getItem('senderID') || '');
-  const [receiverId, setReceiverId] = useState(localStorage.getItem('receiverID') || '');
+  const [receiverId, setReceiverId] = useState('');
   const [content, setContent] = useState('');
 
-  useEffect(() => {
-    fetchChats();
-  }, [fetchChats]);
+  useEffect(()=>{
+    setReceiverId(localStorage.getItem('receiverID') || '');
+  },[content]);
 
   const handleSendData = async () => {
     const postData = { senderId, receiverId, content };
-
+    
     try {
       const res = await axios.post('https://bookish-adventure-qrv6xv6p4x629x7v-4000.app.github.dev/message', postData);
-      setContent(''); // Clear input content after sending message
-
-      const chat = chats.find(chat =>
-        (chat.user1Id._id === senderId && chat.user2Id._id === receiverId) ||
-        (chat.user2Id._id === senderId && chat.user1Id._id === receiverId)
-      );
-
-      if (chat) {
-        fetchMessages(chat._id);
-      }
-
+      console.log(res);
+      // Clear input content after sending message
+      setContent('');
       messageEventEmitter.emit('messageSent');
-      
     } catch (err) {
       console.error('Error sending message:', err);
     }
@@ -48,5 +38,4 @@ export function useMessageService() {
     handleSendData,
   };
 }
-
 export { messageEventEmitter };

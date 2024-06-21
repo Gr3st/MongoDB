@@ -26,6 +26,8 @@ export function searchMechanics() {
       getSearchUsers();
     } else {
       setUsersData([]); // Reset usersData if search is empty
+      localStorage.removeItem('receiverID');
+      setActiveUser(false);
     }
   }, [search]);
 
