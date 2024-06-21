@@ -64,7 +64,7 @@ function App() {
         </div>
 
         <Routes>
-          <Route path="*" element={<div style={{display: 'none'}}> Not Found or You do not have permission.</div>}/>
+          <Route path="*" element={<></>}/>
           <Route path='/logout' element={<LogOut onLogout={handleLogout} />} />
           <Route path="/register" element={<RegisterForm />} />
           <Route path="/login" element={<LoginForm onLogin={handleLogin}/>} />
