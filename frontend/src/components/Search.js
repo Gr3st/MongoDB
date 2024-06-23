@@ -20,8 +20,22 @@ function App() {
         <div className="search-result">
           {/* <h3>Matching Users</h3> */}
           {usersData.map(user => (
-            <div  className="search-result-text" key={user._id} onClick={() => { setReceiverID(user._id); setSearch(user.username); setActiveUser(true); }}>
-              <p>Username: {user.username}</p>
+            <div  className="chat" key={user._id} onClick={() => { setReceiverID(user._id); setSearch(user.username); setActiveUser(true); }}>
+               <img
+                  width='40'
+                  height='40'
+                  src='https://img.icons8.com/color/48/circled-user-female-skin-type-6--v1.png'
+                  alt='circled-user-female-skin-type-6--v1'
+                />
+               <div className='chat-data'>
+                 
+                <div className='chat-name'>
+                  <p>{user.name+" "+user.surname}</p>
+                </div>
+                <div className='last-message'>
+                  {user.username}
+              </div>
+              </div>
             </div>
           ))}
         </div>
