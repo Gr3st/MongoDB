@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import moment from 'moment';
 import Search from '../components/Search';
 
@@ -7,6 +7,7 @@ function PrivateChatsActive({chats}) {
 
   return (
     <div className='private-chats'>
+      {console.log(chats)}
       {localStorage.getItem('search')==='true'&&
         chats.filter(chat => chat.user1Id._id === localStorage.getItem('receiverID') || chat.user2Id._id === localStorage.getItem('receiverID')).map((chat) => (
           <div className='chat' key={chat._id} onClick={() => fetchMessages(chat)}>

@@ -1,4 +1,45 @@
 const Schemas = require('../models/schemas');
+// messageController.js
+exports.createChat = async (req, res) => {
+    const { user1Id, user2Id } = req.body;
+  
+    try {
+      // Check if a chat already exists
+      let privateChat = await Schemas.PrivateChat.findOne({
+        $or: [
+          { user1Id, user2Id },
+          { user2Id: user1Id }
+        ]
+      });
+  
+      if (!privateChat) {
+        // Create new chat
+        privateChat = new Schemas.PrivateChat({ user1Id, user2Id });
+        await privateChat.save();
+      }
+  
+      res.json(privateChat);
+    } catch (error) {
+      console.error(error);
+      res.status(500).send('Internal Server Error');
+    }
+  };
+// messageController.js
+exports.deleteChat = async (req, res) => {
+    const { chatId } = req.params;
+  
+    try {
+      const chat = await Schemas.PrivateChat.findByIdAndDelete(chatId);
+      if (!chat) {
+        return res.status(404).send('Chat not found');
+      }
+      res.send('Chat deleted');
+    } catch (error) {
+      console.error(error);
+      res.status(500).send('Internal Server Error');
+    }
+  };
+    
 
 exports.send = async (req, res) => {
     const { senderId, receiverId, content } = req.body;

@@ -45,7 +45,7 @@
   justify-content: space-between;
   align-items: center;
   flex-direction: column;
-  padding: 0 26px 0 16px;
+  padding: 0 32px 0 16px;
   background-color: var(--background-dark-theme-left);
   color: var(--text-dark-theme);
 }

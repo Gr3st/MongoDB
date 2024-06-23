@@ -24,6 +24,9 @@ export function privateChatGet() {
   };
   useEffect(() => {
     fetchChats();
+  }, [receiverID,[]]);
+  useEffect(() => {
+    fetchChats();
     fetchLastMessages();
   }, [localStorage.getItem('senderID'),[]]);
 

@@ -5,6 +5,12 @@ const authController = require('../controllers/authController');
 const messageController = require('../controllers/messageController');
 const userController = require('../controllers/userController');
 
+// router.js
+router.post('/createChat', messageController.createChat);
+// router.js
+router.delete('/chat/:chatId', messageController.deleteChat);
+
+
 router.post('/user',authController.register);
 router.post('/login', authController.login);
 router.post('/message', messageController.send);
