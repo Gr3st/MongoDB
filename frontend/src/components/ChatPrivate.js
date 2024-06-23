@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import moment from 'moment';
+import Search from '../components/Search';
 
 
 function PrivateChats({ lastMessages, messages, chats, fetchMessages }) {
@@ -57,6 +58,7 @@ function PrivateChats({ lastMessages, messages, chats, fetchMessages }) {
 
   return (
     <div className='private-chats'>
+      <Search />
       {localStorage.getItem('search')==='true'&&
         chats.map((chat) => (
           <div className='chat' key={chat._id} onClick={() => fetchMessages(chat)}>

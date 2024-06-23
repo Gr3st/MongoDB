@@ -8,6 +8,7 @@ import LogOut from './components/LogOut'; // Ensure the import is correct
 
 import { privateChatGet } from './services/chatService';
 import PrivateChats from './components/ChatPrivate';
+import PrivateChatsActive from './components/ChatPrivateActive';
 import PrivateMessages from './components/ChatMessage';
 
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
@@ -45,20 +46,22 @@ function App() {
     <div className="App">
       <Router>
         <div className='left-panel'>
-          <Search />
+          
     
           <PrivateChats lastMessages={lastMessages} messages={messages} chats={chats} fetchMessages={fetchMessages} />
 
-          {isLogged
+          <div className='sign-btn'>{isLogged
             ? <Link to="/logout">Logout</Link>
             :     
             <>
               <Link to="/login">Login</Link>
               <Link to="/register">Register</Link>
             </>}
+          </div>
         </div>
         
         <div className='right-panel'>
+          {selectedChat && <div className='user-panel'><PrivateChatsActive chats={chats}/></div>}
           {selectedChat && <div className='messages-panel'><PrivateMessages messages={messages} selectedChat={selectedChat} /></div>}
           <MessageForm />
         </div>

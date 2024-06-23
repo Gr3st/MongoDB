@@ -12,7 +12,7 @@ function App() {
       <div className='search'>
         <input
           type="text"
-          placeholder='search...'
+          placeholder='Search...'
           onChange={(e) => {setSearch(e.target.value); localStorage.setItem('search',e.target.value===''?true:false)}}
         />
       </div>

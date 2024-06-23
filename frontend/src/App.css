@@ -6,15 +6,16 @@
   text-align: center;
   display: flex;
   flex-direction: row;
-  font-family: 'Roboto', sans-serif;
+  font-family: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  /* font-family: 'Roboto', sans-serif; */
 }
-
 :root{
   --background-dark-theme-right: #1e1e2f;
   --background-dark-theme-left: #2a2a3d;
   --background-dark-sender: #4d4d63;
   --background-dark-reciver: #343450;
-  --background-input: #333;
+  --background-input: rgb(55, 65, 81, 1);
+  --color-input:rgb(156,163,175,1);
   --text-dark-theme: white;
 }
 ::-webkit-scrollbar {
@@ -41,10 +42,10 @@
   min-width: 300px;
   height: 100vh;
   display: flex;
-  justify-content: flex-start;
+  justify-content: space-between;
   align-items: center;
   flex-direction: column;
-  padding: 0 5px 0 5px;
+  padding: 0 16px 0 16px;
   background-color: var(--background-dark-theme-left);
   color: var(--text-dark-theme);
 }
@@ -58,11 +59,13 @@
 }
 .left-panel .search input{
   width: 100%;
-  padding: 16px;
-  background-color: var(--background-dark-theme-right);
+  margin-top: 8px;
+  padding: 0.5rem;
+  font-size: 1rem;
+  background-color: var(--background-input);
   border: none;
   border-radius: 4px;
-  color: var(--text-dark-theme);
+  color: var(--color-input);
   outline: none;
 }
 .left-panel .search-result{
@@ -84,7 +87,8 @@
   justify-content: flex-start;
   align-items: flex-start;
 }
-.left-panel .private-chats{
+.private-chats{
+  color: var(--text-dark-theme);
   width: 100%;
   height: auto;
   display: flex;
@@ -92,10 +96,10 @@
   justify-content: center;
   align-items: center;
 }
-.left-panel .private-chats .chat{
-  width: 90%;
+.private-chats .chat{
+  width: 100%;
   height: 50px;
-  padding: 8px 16px 8px 16px;
+  padding: 8px 8px 8px 8px;
   cursor: pointer;
   display: flex;
   flex-direction: row;
@@ -103,15 +107,15 @@
   align-items: center;
   border-radius: 4px;
 }
-.left-panel .private-chats .chat .chat-data{
+.private-chats .chat .chat-data{
   width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
-  padding: 8px 16px;
+  padding: 8px 8px;
 }
-.chat:hover{
+.left-panel .chat:hover{
   background-color: rgb(42, 42, 49);
 }
 
@@ -138,20 +142,48 @@
   align-items: center; /* Wyśrodkowanie zawartości w pionie */
   padding-left: 8px;
 }
-
+.left-panel .sign-btn{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 90%;
+  cursor: pointer;
+  align-items: center;
+  margin: 0 0 20px 0;
+}
+.left-panel .sign-btn a{
+  display: flex;
+  align-items: center;
+  font-weight: 500;
+  justify-content: center;
+  width: 100%;
+  color: var(--background-dark-theme-left);
+  text-decoration: none;
+  font-size: 1rem;
+  background-color: white;
+  padding: 8px 16px 8px 16px;
+  border-radius: 4px;
+}
 .App .right-panel {
   display: flex;
   background-color: var(--background-dark-theme-right);
   justify-content: flex-start;
   align-items: center;
   width: 100%;
-  padding: 10px 10px 0 10px;
+
   flex-direction: column;
   position: relative; /* Konieczne do pozycjonowania elementów potomnych */
 }
+.right-panel .user-panel{
+  width: 100%;
+  height: auto;
+  min-height: 50px;
+  padding: 10px 0 20px 0;
+  background-color: var(--background-dark-theme-left);
+}
 .right-panel .messages-panel{
   width: 100%;
-  height: 90vh;
+  height: 80vh;
   overflow-y: scroll;
 }
 
@@ -161,7 +193,7 @@
   width: 100%;
   display: flex;
   justify-content: center;
-  background-color: var(--background-dark-theme-right);
+  background-color: var(--background-dark-theme-left);
   align-items: center;
   padding: 20px 0 20px 0;
 }
@@ -172,23 +204,34 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: var(--background-dark-theme-left);
+  padding: 8px 16px 8px 16px;
+  background-color: var(--background-input);
   border-radius: 4px;
-  padding: 8px; /* Dodatkowy padding dla estetyki */
+  /* padding: 8px; Dodatkowy padding dla estetyki */
 }
 
 .right-panel .message-field .message-field-type input {
   width: 100%; /* Aby input wypełnił całą szerokość rodzica */
-  padding: 8px 16px; /* Dodatkowy padding dla inputa */
+  font-size: 1rem;
   background-color: transparent;
   border: none;
   outline: none;
-  color: var(--text-dark-theme);
+  color: var(--color-input);
 }
-.right-panel .message-field .message-field-type button {
+.right-panel .message-field button {
+  font-size: 1rem;
+  width: auto;
+  border-radius: 4px;
+  margin: 0 0 0 10px;
+  cursor: pointer;
+  height: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 6px;
   border: none;
-  background-color: transparent;
-  color: var(--text-dark-theme);
+  background-color: rgb(37, 99, 235, 1);
+  color: var(--color-input);
 }
 .right-panel .chat-panel{
   color: var(--text-dark-theme);

@@ -85,7 +85,7 @@
   color: var(--color-dark-theme);
 }
 .register-panel button{
-  font-size: 1rem;
+  /* font-size: 1rem; */
   background-color: var(--background-dark-theme);
   width: 100%;
   height: auto;
