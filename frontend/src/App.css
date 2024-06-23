@@ -10,10 +10,10 @@
   /* font-family: 'Roboto', sans-serif; */
 }
 :root{
-  --background-dark-theme-right: #1e1e2f;
-  --background-dark-theme-left: #2a2a3d;
-  --background-dark-sender: #4d4d63;
-  --background-dark-reciver: #343450;
+  --background-dark-theme-right: #1a202c;
+  --background-dark-theme-left: rgb(31, 41, 55, 1);
+  --background-dark-sender: rgb(37, 99, 235, 1);
+  --background-dark-reciver: #4d4d63;
   --background-input: rgb(55, 65, 81, 1);
   --color-input:rgb(156,163,175,1);
   --text-dark-theme: white;

@@ -2,7 +2,6 @@ import React, { useEffect } from 'react';
 import moment from 'moment';
 import Search from '../components/Search';
 
-
 function PrivateChats({ lastMessages, messages, chats, fetchMessages }) {
 
   const timeSinceMessage = (timestamp) => {
@@ -56,11 +55,27 @@ function PrivateChats({ lastMessages, messages, chats, fetchMessages }) {
     );
   };
 
+  // Sort chats by the last message timestamp
+  const sortedChats = chats.slice().sort((a, b) => {
+    const getChatLastTimestamp = (chatId) => {
+      const last = lastMessages.filter(
+        (last) => last.receiverId === chatId || last.senderId === chatId
+      );
+      if (last.length === 0) return 0;
+      return new Date(last[last.length - 1].timestamp).getTime();
+    };
+
+    const chatAId = localStorage.getItem('senderID') === a.user1Id._id ? a.user2Id._id : a.user1Id._id;
+    const chatBId = localStorage.getItem('senderID') === b.user1Id._id ? b.user2Id._id : b.user1Id._id;
+
+    return getChatLastTimestamp(chatBId) - getChatLastTimestamp(chatAId);
+  });
+
   return (
     <div className='private-chats'>
       <Search />
-      {localStorage.getItem('search')==='true'&&
-        chats.map((chat) => (
+      {localStorage.getItem('search')==='true' &&
+        sortedChats.map((chat) => (
           <div className='chat' key={chat._id} onClick={() => fetchMessages(chat)}>
             <img
               width='40'
