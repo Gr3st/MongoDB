@@ -7,10 +7,10 @@ function PrivateChatsActive({chats}) {
 
   return (
     <div className='private-chats'>
-      {console.log(chats)}
+      {/* {console.log(chats)} */}
       {localStorage.getItem('search')==='true'&&
         chats.filter(chat => chat.user1Id._id === localStorage.getItem('receiverID') || chat.user2Id._id === localStorage.getItem('receiverID')).map((chat) => (
-          <div className='chat' key={chat._id} onClick={() => fetchMessages(chat)}>
+          <div className='chat' key={chat._id} >
             <img
               width='40'
               height='40'

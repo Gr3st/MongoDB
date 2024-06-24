@@ -7,14 +7,14 @@ exports.createChat = async (req, res) => {
       // Check if a chat already exists
       let privateChat = await Schemas.PrivateChat.findOne({
         $or: [
-          { user1Id, user2Id },
-          { user2Id: user1Id }
+          { user1Id: user1Id, user2Id: user2Id },
+          { user1Id: user2Id, user2Id: user1Id }
         ]
       });
   
       if (!privateChat) {
         // Create new chat
-        privateChat = new Schemas.PrivateChat({ user1Id, user2Id });
+        privateChat = new Schemas.PrivateChat({ user1Id: user1Id, user2Id: user2Id });
         await privateChat.save();
       }
   

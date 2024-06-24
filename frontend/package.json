@@ -21,7 +21,7 @@
       "localhost",
       ".localhost"
     ],
-    "proxy": "https://bookish-adventure-qrv6xv6p4x629x7v-4000.app.github.dev/"
+    "proxy": "https://bookish-adventure-qrv6xv6p4x629x7v-4000.app.github.dev"
   },
   "scripts": {
     "start": "react-scripts start",
