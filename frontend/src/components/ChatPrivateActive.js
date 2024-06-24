@@ -1,23 +1,23 @@
 import React, { useEffect } from 'react';
 
-function PrivateChatsActive({ chats, setSelectedChat }) {
+function PrivateChatsActive({ chats, setSelectedChat, fetchMessages }) {
   const senderID = localStorage.getItem('senderID');
   const receiverID = localStorage.getItem('receiverID');
 
   // useEffect to select chat automatically based on localStorage values
   useEffect(() => {
     // Find the first chat that matches the condition
-    const chatToSelect = chats.filter(
+    const chatToSelect = chats.find(
       (chat) =>
         chat.user1Id._id === receiverID || chat.user2Id._id === receiverID
-    )
-    .map((chat) => (chat._id));
+    );
 
     // If a chat is found, select it
     if (chatToSelect) {
-      setSelectedChat(chatToSelect._id);
+      setSelectedChat(chatToSelect);
+      fetchMessages(chatToSelect[0]);
     }
-  }, [chats, receiverID, setSelectedChat]);
+  }, [chats, receiverID, setSelectedChat, fetchMessages]);
 
   return (
     <div className='private-chats'>
