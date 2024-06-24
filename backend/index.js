@@ -11,14 +11,10 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended:false}));
 
 const corsOptions = {
-    // origin: '*',
-    origin: 'https://bookish-adventure-qrv6xv6p4x629x7v-3000.app.github.dev',
-    methods: ['GET', 'POST'],
-    allowedHeaders: ['Content-Type'],
+    origin: '*',
     credentials: true,
     optionSuccessStatus: 200
 }
-
 
 app.use(cors(corsOptions));
 app.use('/',router);
