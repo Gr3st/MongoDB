@@ -61,7 +61,7 @@ function App() {
         </div>
         
         <div className='right-panel'>
-          <div className='user-panel'>{selectedChat && <PrivateChatsActive chats={chats}/>}</div>
+          <div className='user-panel'>{<PrivateChatsActive chats={chats} setSelectedChat={setSelectedChat}/>}</div>
           {selectedChat && <div className='messages-panel'><PrivateMessages messages={messages} selectedChat={selectedChat} /></div>}
           <MessageForm />
         </div>

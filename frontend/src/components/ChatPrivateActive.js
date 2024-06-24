@@ -1,16 +1,33 @@
-import React, { useEffect, useState } from 'react';
-import moment from 'moment';
-import Search from '../components/Search';
+import React, { useEffect } from 'react';
 
+function PrivateChatsActive({ chats, setSelectedChat }) {
+  const senderID = localStorage.getItem('senderID');
+  const receiverID = localStorage.getItem('receiverID');
 
-function PrivateChatsActive({chats}) {
+  // useEffect to select chat automatically based on localStorage values
+  useEffect(() => {
+    // Find the first chat that matches the condition
+    const chatToSelect = chats.filter(
+      (chat) =>
+        chat.user1Id._id === receiverID || chat.user2Id._id === receiverID
+    )
+    .map((chat) => (chat._id));
+
+    // If a chat is found, select it
+    if (chatToSelect) {
+      setSelectedChat(chatToSelect._id);
+    }
+  }, [chats, receiverID, setSelectedChat]);
 
   return (
     <div className='private-chats'>
-      {/* {console.log(chats)} */}
-      {localStorage.getItem('search')==='true'&&
-        chats.filter(chat => chat.user1Id._id === localStorage.getItem('receiverID') || chat.user2Id._id === localStorage.getItem('receiverID')).map((chat) => (
-          <div className='chat' key={chat._id} >
+      {chats
+        .filter(
+          (chat) =>
+            chat.user1Id._id === receiverID || chat.user2Id._id === receiverID
+        )
+        .map((chat) => (
+          <div className='chat' key={chat._id} onClick={() => setSelectedChat(chat._id)}>
             <img
               width='40'
               height='40'
@@ -19,15 +36,14 @@ function PrivateChatsActive({chats}) {
             />
             <div className='chat-data'>
               <div className='chat-name'>
-                {localStorage.getItem('senderID') === chat.user1Id._id
+                {senderID === chat.user1Id._id
                   ? `${chat.user2Id.name} ${chat.user2Id.surname}`
                   : `${chat.user1Id.name} ${chat.user1Id.surname}`}
               </div>
+              {/* Uncomment this if getLastMessage function is defined elsewhere */}
               {/* <div className='last-message'>
                 {getLastMessage(
-                  localStorage.getItem('senderID') === chat.user1Id._id
-                    ? chat.user2Id._id
-                    : chat.user1Id._id
+                  senderID === chat.user1Id._id ? chat.user2Id._id : chat.user1Id._id
                 )}
               </div> */}
             </div>
