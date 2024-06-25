@@ -22,13 +22,13 @@ export function privateChatGet() {
       console.error('Error fetching chats:', error);
     }
   };
-  useEffect(() => {
-    fetchChats();
-  }, [receiverID,[]]);
+  // useEffect(() => {
+  //   fetchChats();
+  // }, [receiverID,[]]);
   useEffect(() => {
     fetchChats();
     fetchLastMessages();
-  }, [localStorage.getItem('senderID'),[]]);
+  }, [localStorage.getItem('senderID'),receiverID,[]]);
 
   const fetchMessages = async (chat) => {
     try {
@@ -71,7 +71,7 @@ export function privateChatGet() {
     return () => {
       messageEventEmitter.off('messageSent', handleMessageSent);
     };
-  }, [selectedChat,receiverID]);
+  }, [selectedChat]);
 
   return { chats, setChats, messages, setMessages, selectedChat, setSelectedChat, fetchMessages, lastMessages };
 }

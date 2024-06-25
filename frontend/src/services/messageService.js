@@ -12,7 +12,7 @@ export function messageService() {
 
   useEffect(()=>{
     setReceiverId(localStorage.getItem('receiverID') || '');
-  },[content,receiverId]);
+  },[content]);
 
   const handleSendData = async () => {
     const postData = { senderId, receiverId, content };

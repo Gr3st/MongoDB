@@ -120,7 +120,7 @@ exports.getLastMessage = async (req, res) => {
             { receiverId: userId},
         ]
     }).sort({ timestamp: 1 }).exec();
-    console.log(messages);
+  
     res.json(messages);
   } catch (error) {
       console.error(error);

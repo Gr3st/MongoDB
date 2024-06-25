@@ -17,7 +17,7 @@ function PrivateChatsActive({ chats, setSelectedChat, fetchMessages }) {
       setSelectedChat(chatToSelect);
       fetchMessages(chatToSelect[0]);
     }
-  }, [chats, receiverID, setSelectedChat, fetchMessages]);
+  }, [receiverID, fetchMessages]);
 
   return (
     <div className='private-chats'>
@@ -27,7 +27,7 @@ function PrivateChatsActive({ chats, setSelectedChat, fetchMessages }) {
             chat.user1Id._id === receiverID || chat.user2Id._id === receiverID
         )
         .map((chat) => (
-          <div className='chat' key={chat._id} onClick={() => setSelectedChat(chat._id)}>
+          <div className='chat' key={chat._id} >
             <img
               width='40'
               height='40'

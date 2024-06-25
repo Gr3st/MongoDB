@@ -8,24 +8,28 @@ require('dotenv/config');
 const app = express();
 
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended:false}));
+app.use(bodyParser.urlencoded({ extended: false }));
 
 const corsOptions = {
-    origin: '*',
+    origin: 'https://bookish-adventure-qrv6xv6p4x629x7v-3000.app.github.dev',
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
     credentials: true,
-    optionSuccessStatus: 200
-}
+    allowedHeaders: 'Content-Type,Authorization',
+    optionsSuccessStatus: 204
+};
 
 app.use(cors(corsOptions));
-app.use('/',router);
+app.use('/', router);
 
 const dbOptions = {
-    useNewUrlParser:true,
-}
-mongoose.connect(process.env.DB_URI).then(()=>console.log('DB Connected!')).catch(err=>console.log(err));
+    useNewUrlParser: true,
+};
+mongoose.connect(process.env.DB_URI)
+    .then(() => console.log('DB Connected!'))
+    .catch(err => console.log(err));
 
 const port = process.env.PORT || 4000;
 
-const server = app.listen(port,()=>{
+const server = app.listen(port, () => {
     console.log(`Server is running on port ${port}`);
-})
+});
